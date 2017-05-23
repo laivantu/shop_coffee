@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="db_shop_coffee" match-name="data_bill"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="data_delivery"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="data_order"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="data_order_detail"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="data_takeaway"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="pos_category"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="pos_customer"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="pos_product"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="pos_setting"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="pos_shop"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="pos_staff"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="pos_sub_menu"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="pos_table"/>
+  <table-filter match-catalog="db_shop_coffee" match-name="pos_user"/>
+</hibernate-reverse-engineering>

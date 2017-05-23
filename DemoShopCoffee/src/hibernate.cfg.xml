@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="">
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <property name="hibernate.enable_lazy_load_no_trans">true</property>
+  <mapping class="entities.DataBill"/>
+  <mapping class="entities.DataDelivery"/>
+  <mapping class="entities.DataOrder"/>
+  <mapping class="entities.DataOrderDetail"/>
+  <mapping class="entities.DataTakeaway"/>
+  <mapping class="entities.PosCategory"/>
+  <mapping class="entities.PosCustomer"/>
+  <mapping class="entities.PosProduct"/>
+  <mapping class="entities.PosSetting"/>
+  <mapping class="entities.PosShop"/>
+  <mapping class="entities.PosStaff"/>
+  <mapping class="entities.PosSubMenu"/>
+  <mapping class="entities.PosTable"/>
+  <mapping class="entities.PosUser"/>
+ </session-factory>
+</hibernate-configuration>

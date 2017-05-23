@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+
+    <context:component-scan base-package="controller" />
+    <mvc:annotation-driven />
+    <context:annotation-config />
+    
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/db_shop_coffee"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value=""></property>
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+	</bean>
+    
+    <tx:annotation-driven/>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+    
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="abstractModel" class="dao.AbstractModel" autowire="constructor">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+	<bean id="billDAO" class="dao.DataBillDAO" 
+		parent="abstractModel"></bean>
+		
+	<bean id="deliveryDAO" class="dao.DataDeliveryDAO" 
+		parent="abstractModel"></bean>
+	
+	<bean id="orderDAO" class="dao.DataOrderDAO" 
+		parent="abstractModel"></bean>
+	
+	<bean id="orderDetailDAO" class="dao.DataOrderDetailDAO" 
+		parent="abstractModel"></bean>
+		
+	<bean id="takeawayDAODAO" class="dao.DataTakeawayDAO" 
+		parent="abstractModel"></bean>
+		
+	<bean id="categoryDAO" class="dao.PosCategoryDAO" 
+		parent="abstractModel"></bean>
+		
+	<bean id="customerDAO" class="dao.PosCustomerDAO" 
+		parent="abstractModel"></bean>
+	
+		<bean id="productDAO" class="dao.PosProductDAO" 
+		parent="abstractModel"></bean>
+		
+	<bean id="settingDAO" class="dao.PosSettingDAO" 
+		parent="abstractModel"></bean>
+	
+	<bean id="shopDAO" class="dao.PosShopDAO" 
+		parent="abstractModel"></bean>
+	
+	<bean id="staffDAO" class="dao.PosStaffDAO" 
+		parent="abstractModel"></bean>
+	
+	<bean id="tableDAO" class="dao.PosTableDAO" 
+		parent="abstractModel"></bean>
+	
+	<bean id="userDAO" class="dao.PosUserDAO" 
+		parent="abstractModel"></bean>
+		
+    
+    <!--
+    Most controllers will use the ControllerClassNameHandlerMapping above, but
+    for the index controller we are using ParameterizableViewController, so we must
+    define an explicit mapping for it.
+    -->
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="index.html">indexController</prop>
+            </props>
+        </property>
+    </bean>
+    
+     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the several properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/pages/"
+          p:suffix=".jsp" />
+
+    <!--
+    The index controller.
+    -->
+    <bean name="indexController"
+          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+          p:viewName="index" />
+
+</beans>
